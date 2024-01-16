@@ -1,0 +1,28 @@
+{
+"get-started": "开始",
+"create-account": "免费创建一个账户。",
+"first-name": "名字",
+
+"last-name": "姓氏",
+"name-required": "需要姓名",
+"gender": "性别",
+"male": "男性",
+"female": "女性",
+"phone-no": "电话号码",
+"email-address": "电子邮件地址",
+"email-is-required": "需要电子邮件",
+"password": "密码",
+"verification": "已发送邮件。请检查并验证电子邮件。",
+"password-required": "需要密码",
+"short-password": "密码太短。",
+"register": "注册",
+"already-login": "已经有账户了？",
+"login": "登录",
+"by-registering": "通过注册，我同意GOGOGM的",
+"Terms": "条款",
+"and": "和",
+"privacy-policy": "隐私政策。",
+"welcome": "欢迎来到",
+"company": "GOGOGM",
+"slogan": "全球华人首选线上游戏点卡, 购物礼品卡, 手游和直播充值直充平台"
+}

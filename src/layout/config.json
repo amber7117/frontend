@@ -1,0 +1,231 @@
+{
+  "menu": [
+    {
+      "title": "header.home",
+      "path": "/"
+    },
+    {
+      "title": "header.categories",
+      "path": "/",
+      "isDropdown": true
+    },
+    {
+      "title": "header.card",
+      "path": "/products?type=card"
+    },
+    {
+      "title": "header.payment",
+      "path": "/products?type=payment"
+    },
+    {
+      "title": "header.credit",
+      "path": "/products?type=credit"
+    }
+  ],
+  "mobile_menu": [
+    {
+      "name": "header.home",
+      "href": "/"
+    },
+    {
+      "name": "header.search",
+      "href": "/search"
+    },
+    {
+      "name": "header.product",
+      "href": "/products"
+    },
+    {
+      "name": "header.checkout",
+      "href": "/checkout"
+    },
+    {
+      "name": "header.user",
+      "isUser": true,
+      "href": "/auth/login"
+    }
+  ],
+
+  "social": [
+    { "name": "FaceBook", "color": "#1672E6", "href": "#" },
+    { "name": "Instagram", "color": "#F40052", "href": "#" },
+    { "name": "Linkedin", "color": "#0962B7", "href": "#" },
+    { "name": "Pinterest", "color": "#B7081B", "href": "#" }
+  ],
+  "company": {
+    "company_name": "GOGOGM",
+    "address": "Chicago, US",
+    "email": "support@gogogm.com",
+    "phone": "+(001) 100 200 1123"
+  },
+  "footer_links": [
+    {
+      "headline": "footer.product",
+      "children": [
+        { "name": "footer.application", "href": "#" },
+        { "name": "footer.features", "href": "#" },
+        { "name": "footer.requirements", "href": "#" },
+        { "name": "footer.technology", "href": "#" }
+      ]
+    },
+    {
+      "headline": "footer.resources",
+      "children": [
+        { "name": "footer.changelogy", "href": "#" },
+        { "name": "footer.updates", "href": "#" },
+        { "name": "footer.providers", "href": "#" },
+        { "name": "footer.affiliat", "href": "#" },
+        { "name": "footer.roadmap", "href": "#" }
+      ]
+    },
+    {
+      "headline": "footer.company",
+      "children": [
+        { "name": "footer.blog", "href": "#" },
+        { "name": "footer.about-us", "href": "#" },
+        { "name": "footer.contact-us", "href": "#" },
+        { "name": "footer.jobs", "href": "#" },
+        { "name": "footer.team", "href": "#" }
+      ]
+    }
+  ],
+  "languages": [
+    { "name": "English", "key": "en", "countryCode": "uk" },
+    { "name": "中文", "key": "zh", "countryCode": "cn" }
+  ],
+  "currencies": [
+    {
+      "name": "united-states-dollar",
+      "prefix": "USD",
+      "symbol": "US$"
+    },
+
+    { "name": "yuan", "prefix": "CNY", "symbol": "$" },
+
+    {
+      "name": "british-pound",
+      "prefix": "GBP",
+      "symbol": "£"
+    },
+
+    {
+      "name": "australian-dollar",
+      "prefix": "AUD",
+      "symbol": "A$"
+    },
+
+    {
+      "name": "canadian-dollar",
+      "prefix": "CAD",
+      "symbol": "CA$"
+    },
+
+    {
+      "name": "israeli-shekel",
+      "prefix": "ILS",
+      "symbol": "₪"
+    },
+
+    {
+      "name": "brazilian-real",
+      "prefix": "BRL",
+      "symbol": "R$"
+    },
+
+    {
+      "name": "hong-kong-dollar",
+      "prefix": "HKD",
+      "symbol": "HK$"
+    },
+
+    {
+      "name": "swedish-krona",
+      "prefix": "SEK",
+      "symbol": "SEK"
+    },
+
+    {
+      "name": "new-zealand-dollar",
+      "prefix": "NZD",
+      "symbol": "NZ$"
+    },
+
+    {
+      "name": "singapore-dollar",
+      "prefix": "SGD",
+      "symbol": "SGD"
+    },
+
+    {
+      "name": "swiss-franc",
+      "prefix": "CHF",
+      "symbol": "CHF"
+    },
+
+    {
+      "name": "south-african-rand",
+      "prefix": "ZAR",
+      "symbol": "ZAR"
+    },
+
+    {
+      "name": "chinese-renminbi-yuan",
+      "prefix": "CNY",
+      "symbol": "CN¥"
+    },
+
+    {
+      "name": "indian-rupee",
+      "prefix": "INR",
+      "symbol": "₹"
+    },
+
+    {
+      "name": "malaysian-ringgit",
+      "prefix": "MYR",
+      "symbol": "MYR"
+    },
+
+    {
+      "name": "mexican-peso",
+      "prefix": "MXN",
+      "symbol": "MX$"
+    },
+
+    {
+      "name": "pakistani-rupee",
+      "prefix": "PKR",
+      "symbol": "PKR"
+    },
+
+    {
+      "name": "philippine-peso",
+      "prefix": "PHP",
+      "symbol": "₱"
+    },
+
+    {
+      "name": "new-taiwan-dollar",
+      "prefix": "TWD",
+      "symbol": "NT$"
+    },
+
+    {
+      "name": "thai-baht",
+      "prefix": "THB",
+      "symbol": "THB"
+    },
+
+    {
+      "name": "turkish-new-lira",
+      "prefix": "TRY",
+      "symbol": "TRY"
+    },
+
+    {
+      "name": "united-arab-emirates-dirham",
+      "prefix": "AED",
+      "symbol": "AED"
+    }
+  ]
+}

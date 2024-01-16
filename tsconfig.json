@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "useUnknownInCatchVariables": false,
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "paths": {
+      "react": [
+        "./node_modules/@types/react"
+      ]
+    },
+    "incremental": true,
+    "baseUrl": "."
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/pages/api/products/index.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

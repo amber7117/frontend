@@ -1,0 +1,28 @@
+{
+  "get-started": "Get Started",
+  "create-account": "Create an account for free.",
+  "first-name": "First name",
+
+  "last-name": "Last Name",
+  "name-required": "Name required",
+  "gender": "Gender",
+  "male": "Male",
+  "female": "Female",
+  "phone-no": "Phone No.",
+  "email-address": "Email address",
+  "email-is-required": "Email is required",
+  "password": "Password",
+  "verification": "Sent email. Please check and verify email.",
+  "password-required": "Password is required",
+  "short-password": "Password is too short.",
+  "register": "Register",
+  "already-login": "Already have an account? ",
+  "login": "Login",
+  "by-registering": "By registering, I agree to Nextstore",
+  "Terms": "Terms",
+  "and": "and ",
+  "privacy-policy": "Privacy Policy.",
+  "welcome": "Welcome to the",
+  "company": "NEXTSTORE",
+  "slogan": "Reactjs Ecommerce script you need."
+}
