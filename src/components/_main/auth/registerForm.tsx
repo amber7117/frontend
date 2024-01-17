@@ -30,10 +30,10 @@ import { useMutation } from "react-query";
 import * as api from "src/services";
 
 // redux
-// import { useDispatch } from "react-redux";
-// import { setLogin } from "src/redux/slices/user";
+import { useDispatch } from "react-redux";
+import { setLogin } from "src/redux/slices/user";
 // jwt
-// import jwtDecode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 import useTranslation from "next-translate/useTranslation";
 import { toast } from "react-hot-toast";
 import PhoneAutocomplete from "src/components/phoneAutocomplete";
