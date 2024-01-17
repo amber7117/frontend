@@ -29,6 +29,8 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
+    "**/*.jsx",
+    "**/*.js",
     "**/*.tsx",
     "src/pages/api/products/index.js"
   ],
