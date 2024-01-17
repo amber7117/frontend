@@ -68,7 +68,7 @@ export default function UserSelect() {
       setInitialize(false);
     }
   }, [isAuth]);
-  console.log(data, user, "data Avatar");
+  console.log(data, user, "data.data");
   return (
     <RootStyled>
       {!initialize ? (
