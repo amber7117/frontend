@@ -37,13 +37,25 @@ function ReadData() {
   };
 
   return (
-    
-    <Container>
-          <Typography variant="h4" color="text.primary" className="heading">
-        special deals
-      </Typography>
-      <Grid item xs={12} md={6} space={2}>
-        <Card className="main-card-1">
+
+      
+
+
+          
+  <Grid container spacing={2}>
+     <Grid item md={8} xs={12}>
+      <Card sx={{ textAlign: "center", p: 4 }}>
+        <Box position="relative" sx={{ width: 300, height: 200, mx: "auto" }}>
+                <BlurImage
+                  src="/images/commercehope-client-app.png"
+                  alt="banner-2"
+                  layout="fill"
+                  objectFit="contain"
+                  placeholder="blur"
+                  blurDataURL="/images/nextstore-client-app.png"
+                />
+              </Box>
+   
           <CardContent>
             <Stack
               direction={"row"}
@@ -101,7 +113,7 @@ function ReadData() {
           </CardContent>
         </Card>
       </Grid>
-    </Container>
+   </Grid> 
 
   );
 }
