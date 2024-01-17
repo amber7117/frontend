@@ -47,13 +47,13 @@ export default async function handler(
           }
         );
         var data = JSON.stringify({
-          service_id: "service_kcodhc8",
-          template_id: "template_wr6ek3f",
+          service_id: "default_service",
+          template_id: "template_d6xktym",
           user_id: "YWy1s44dsL8EaqbnU",
           template_params: {
             to_email: user.email,
             subject: "Verify your email",
-            from_name: "Nextstore",
+            from_name: "GoGoGM",
             message: `
             <html lang="en"><head>
     <!-- font-family -->
@@ -169,7 +169,7 @@ export default async function handler(
           url: "https://api.emailjs.com/api/v1.0/email/send",
           headers: {
             "Content-Type": "application/json",
-            origin: "http://localhost",
+            origin: "http://app.gogogm.com",
           },
           data: data,
         };
