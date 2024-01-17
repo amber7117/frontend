@@ -26,7 +26,6 @@ export default function UserSelect() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const { user } = useSelector(({ user }: { user: any }) => user);
   const { mutate } = useMutation(api.getProfile, {
     onSuccess: (data) => {
       const { createdAt, joined, ...others } = data.data;
@@ -37,12 +36,17 @@ export default function UserSelect() {
       // signOut();
     },
   });
+function getKeyByValue(object: any, value: any) {
+  return Object.keys(object).find((key) => object[key] === value);
+}
+  
+
   const isAuthPath = getKeyByValue(PATH_PAGE.auth, router.pathname);
   const isHomePath = router.pathname === "/";
   const { t } = useTranslation("common");
   const { data }: any = useSession();
-  const isAuth = Boolean(data);
-
+  const { isAuth, user } = useSelector(({ user }: { user: any }) => user);
+  
   const anchorRef = React.useRef(null);
   const [openUser, setOpen] = React.useState(false);
   const [initialize, setInitialize] = useState(false);
@@ -68,7 +72,7 @@ export default function UserSelect() {
       setInitialize(false);
     }
   }, [isAuth]);
-  console.log(data, user, "data.data");
+
   return (
     <RootStyled>
       {!initialize ? (
