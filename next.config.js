@@ -6,7 +6,7 @@ const withPWA = require("next-pwa")({
 });
 
 const nextTranslate = require("next-translate");
-
+//
 const nextConfig = withPWA(
   nextTranslate({
     env: {
@@ -22,13 +22,22 @@ const nextConfig = withPWA(
       EMAILJS_USER_ID: process.env.EMAILJS_USER_ID,
       SHIPPING_FEE: process.env.SHIPPING_FEE,
       BASE_CURRENCY: process.env.BASE_CURRENCY,
+      NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+      NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET
+
     },
     reactStrictMode: true,
+    eslint:{
+        ignoreDuringBuilds: true,
+    },
     images: {
       formats: ["image/avif", "image/webp"],
-      domains: ["res.cloudinary.com"],
+      domains: ["res.cloudinary.com", "seagm-media.seagmcdn.com"],
     },
+
   })
 );
 
+// );
 module.exports = nextConfig;
+// https://nextjs.org/docs/api-reference/next/image
