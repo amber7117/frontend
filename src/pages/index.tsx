@@ -4,6 +4,8 @@ import React from "react";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import type { InferGetStaticPropsType } from "next";
+import BlurImage from "src/components/blurImage";
+import Image from "next/image";
 
 // mongoose models
 import dbConnect from "lib/dbConnect";
