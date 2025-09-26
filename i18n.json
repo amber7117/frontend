@@ -1,0 +1,20 @@
+{
+  "locales": ["en"],
+  "defaultLocale": "en",
+  "pages": {
+    "*": ["common"],
+    "/": ["home"],
+    "/products": ["listing"],
+    "/products/[parent]": ["listing"],
+    "/products/[parent]/[child]": ["listing"],
+    "/product/[slug]": ["details"],
+    "/checkout": ["checkout"],
+    "/order": ["order"],
+    "/auth/login": ["login"],
+    "/auth/register": ["register"],
+    "/404": ["404"],
+    "/auth/reset-password": ["reset-password"],
+    "/auth/forget-password": ["forget-password", "common"],
+    "/profile": ["profile"]
+  }
+}

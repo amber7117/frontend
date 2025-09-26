@@ -1,0 +1,231 @@
+{
+  "menu": [
+    {
+      "title": "home",
+      "path": "/"
+    },
+    {
+      "title": "categories",
+      "path": "/",
+      "isDropdown": true
+    },
+    {
+      "title": "card",
+      "path": "/products?type=card"
+    },
+    {
+      "title": "payment",
+      "path": "/products?type=payment"
+    },
+    {
+      "title": "credit",
+      "path": "/products?type=credit"
+    }
+  ],
+  "mobile_menu": [
+    {
+      "name": "home",
+      "href": "/"
+    },
+    {
+      "name": "search",
+      "href": "/search"
+    },
+    {
+      "name": "product",
+      "href": "/products"
+    },
+    {
+      "name": "checkout",
+      "href": "/checkout"
+    },
+    {
+      "name": "user",
+      "isUser": true,
+      "href": "/auth/login"
+    }
+  ],
+
+  "social": [
+    { "name": "FaceBook", "color": "#1672E6", "href": "#" },
+    { "name": "Instagram", "color": "#F40052", "href": "#" },
+    { "name": "Linkedin", "color": "#0962B7", "href": "#" },
+    { "name": "Pinterest", "color": "#B7081B", "href": "#" }
+  ],
+  "company": {
+    "company_name": "GOGOGM",
+    "address": "Chicago, US",
+    "email": "support@gogogm.com",
+    "phone": "+(001) 100 200 1123"
+  },
+  "footer_links": [
+    {
+      "headline": "product",
+      "children": [
+        { "name": "application", "href": "#" },
+        { "name": "features", "href": "#" },
+        { "name": "requirements", "href": "#" },
+        { "name": "technology", "href": "#" }
+      ]
+    },
+    {
+      "headline": "resources",
+      "children": [
+        { "name": "changelogy", "href": "#" },
+        { "name": "updates", "href": "#" },
+        { "name": "providers", "href": "#" },
+        { "name": "affiliat", "href": "#" },
+        { "name": "roadmap", "href": "#" }
+      ]
+    },
+    {
+      "headline": "company",
+      "children": [
+        { "name": "blog", "href": "#" },
+        { "name": "about-us", "href": "#" },
+        { "name": "contact-us", "href": "#" },
+        { "name": "jobs", "href": "#" },
+        { "name": "team", "href": "#" }
+      ]
+    }
+  ],
+  "languages": [
+    { "name": "English", "key": "en", "countryCode": "uk" },
+    { "name": "中文", "key": "zh", "countryCode": "cn" }
+  ],
+  "currencies": [
+    {
+      "name": "united-states-dollar",
+      "prefix": "USD",
+      "symbol": "US$"
+    },
+
+    { "name": "yuan", "prefix": "CNY", "symbol": "$" },
+
+    {
+      "name": "british-pound",
+      "prefix": "GBP",
+      "symbol": "£"
+    },
+
+    {
+      "name": "australian-dollar",
+      "prefix": "AUD",
+      "symbol": "A$"
+    },
+
+    {
+      "name": "canadian-dollar",
+      "prefix": "CAD",
+      "symbol": "CA$"
+    },
+
+    {
+      "name": "israeli-shekel",
+      "prefix": "ILS",
+      "symbol": "₪"
+    },
+
+    {
+      "name": "brazilian-real",
+      "prefix": "BRL",
+      "symbol": "R$"
+    },
+
+    {
+      "name": "hong-kong-dollar",
+      "prefix": "HKD",
+      "symbol": "HK$"
+    },
+
+    {
+      "name": "swedish-krona",
+      "prefix": "SEK",
+      "symbol": "SEK"
+    },
+
+    {
+      "name": "new-zealand-dollar",
+      "prefix": "NZD",
+      "symbol": "NZ$"
+    },
+
+    {
+      "name": "singapore-dollar",
+      "prefix": "SGD",
+      "symbol": "SGD"
+    },
+
+    {
+      "name": "swiss-franc",
+      "prefix": "CHF",
+      "symbol": "CHF"
+    },
+
+    {
+      "name": "south-african-rand",
+      "prefix": "ZAR",
+      "symbol": "ZAR"
+    },
+
+    {
+      "name": "chinese-renminbi-yuan",
+      "prefix": "CNY",
+      "symbol": "CN¥"
+    },
+
+    {
+      "name": "indian-rupee",
+      "prefix": "INR",
+      "symbol": "₹"
+    },
+
+    {
+      "name": "malaysian-ringgit",
+      "prefix": "MYR",
+      "symbol": "MYR"
+    },
+
+    {
+      "name": "mexican-peso",
+      "prefix": "MXN",
+      "symbol": "MX$"
+    },
+
+    {
+      "name": "pakistani-rupee",
+      "prefix": "PKR",
+      "symbol": "PKR"
+    },
+
+    {
+      "name": "philippine-peso",
+      "prefix": "PHP",
+      "symbol": "₱"
+    },
+
+    {
+      "name": "new-taiwan-dollar",
+      "prefix": "TWD",
+      "symbol": "NT$"
+    },
+
+    {
+      "name": "thai-baht",
+      "prefix": "THB",
+      "symbol": "THB"
+    },
+
+    {
+      "name": "turkish-new-lira",
+      "prefix": "TRY",
+      "symbol": "TRY"
+    },
+
+    {
+      "name": "united-arab-emirates-dirham",
+      "prefix": "AED",
+      "symbol": "AED"
+    }
+  ]
+}

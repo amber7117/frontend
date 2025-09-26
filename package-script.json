@@ -1,0 +1,17 @@
+{
+  "name": "add-admin-script",
+  "version": "1.0.0",
+  "description": "Script to add admin user to the database",
+  "main": "add-admin.js",
+  "scripts": {
+    "add-admin": "node add-admin.js",
+    "install-deps": "npm install mongoose bcrypt"
+  },
+  "dependencies": {
+    "mongoose": "^6.0.0",
+    "bcrypt": "^5.0.0"
+  },
+  "keywords": ["admin", "database", "mongodb"],
+  "author": "",
+  "license": "MIT"
+}
