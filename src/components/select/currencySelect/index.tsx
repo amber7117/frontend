@@ -121,7 +121,7 @@ export default function LocaleSelect({ ...props }) {
           >
             <Stack className="popover-heading">
               <Typography variant="h6" color="text.primary" p={2}>
-                {t("header.select-currency")}
+                {t("select-currency")}
               </Typography>
             </Stack>
             <Divider />

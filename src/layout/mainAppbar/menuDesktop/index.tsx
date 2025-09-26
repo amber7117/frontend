@@ -152,7 +152,7 @@ export default function MenuDesktop({ ...props }) {
           <Skeleton 
             key={links.title}
             variant="rectangular" 
-            width={links.title === "header.categories" ? 96 : 54} 
+            width={links.title === "categories" ? 96 : 54} 
             height={22} 
             sx={{ borderRadius: "4px", mx: "6px" }} 
           />

@@ -20,7 +20,7 @@ export default function Brands({ ...props }) {
   return (
     <RootStyled>
       <Typography mt={8} variant="h2" color="text.primary" textAlign="center">
-        {t("header.brands")}
+        {t("brands")}
       </Typography>
       <Typography
         variant="body1"
@@ -28,7 +28,7 @@ export default function Brands({ ...props }) {
         textAlign="center"
         className="description"
       >
-        {t("header.lorem-ipsum")}
+        {t("lorem-ipsum")}
       </Typography>
       {data?.length === 0 ? (
         <NoDataFound />

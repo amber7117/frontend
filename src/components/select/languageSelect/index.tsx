@@ -96,7 +96,7 @@ export default function LanguageSelect({ ...props }) {
           >
             <Stack>
               <Typography variant="h6" color="text.primary" p={2}>
-                {t("header.select-language")}
+                {t("select-language")}
               </Typography>
             </Stack>
             <Divider />

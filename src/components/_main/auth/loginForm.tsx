@@ -53,11 +53,11 @@ export default function LoginForm() {
       setloading(true);
       const res = await signIn("credentials", {
         email: email,
-        password: bcrypt.hashSync(password, "$2a$10$CwTycUXWue0Thq9StjUM0u"),
+        password: password, 
         redirect: false,
       });
       setloading(false);
-    if ((res as any).ok) {
+      if ((res as any).ok) {
         toast.success(t("errors.login-success"));
         push(redirect || "/");
       } else {

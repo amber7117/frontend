@@ -24,11 +24,10 @@ const nextConfig = withPWA(
       BASE_CURRENCY: process.env.BASE_CURRENCY,
       NEXTAUTH_URL: process.env.NEXTAUTH_URL,
       NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET
-
     },
     reactStrictMode: true,
-    eslint:{
-        ignoreDuringBuilds: true,
+    eslint: {
+      ignoreDuringBuilds: true,
     },
     images: {
       formats: ["image/avif", "image/webp"],
@@ -43,21 +42,15 @@ const nextConfig = withPWA(
         },
       ],
     },
-    turbopack: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'], 
-          as: '*.js', 
-        },
+    webpack: (config) => {
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      });
+      return config;
     },
-    resolveAlias: {
-      '@/components/*': './src/components/*',
-      '@/lib/*': './src/lib/*',
-    },
-    resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.mjs', '.json']
-  }
-})
-)
+  })
+);
 
 // );
 module.exports = nextConfig;

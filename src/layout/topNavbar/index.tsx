@@ -72,7 +72,7 @@ export default function TopNavbar() {
             alignItems: "center",
           }}>
           <LocationOnOutlinedIcon sx={{ mt: "-2px", fontSize: 16 }} />{" "}
-          {t("header.address")}
+          {t("address")}
         </Typography>
         <Divider orientation="vertical" flexItem />
         <Link href="mailto: support@gogogm.com">

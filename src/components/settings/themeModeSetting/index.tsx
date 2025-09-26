@@ -50,7 +50,7 @@ export default function SettingMode() {
                   index === 0 ? <WbSunnyRoundedIcon /> : <DarkModeRoundedIcon />
                 }
               >
-                {t("header." + mode)}
+                {t("" + mode)}
               </Button>
               <FormControlLabel
                 label=""

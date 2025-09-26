@@ -119,7 +119,7 @@ function CarouselItem({ ...props }) {
                   variant="contained"
                   sx={{ mt: 1 }}
                   onClick={() => router.push(item?.btnPrimary.url)}>
-                  {item?.btnPrimary.btnText || t("header.shop-now")}
+                  {item?.btnPrimary.btnText || t("shop-now")}
                 </Button>
 
                 <Button
@@ -128,7 +128,7 @@ function CarouselItem({ ...props }) {
                   color="warning"
                   sx={{ mt: 1, mx: { sm: 2, xs: 1 } }}
                   onClick={() => router.push(item?.btnSecondary.url)}>
-                  {item?.btnSecondary.btnText || t("header.see-all")}
+                  {item?.btnSecondary.btnText || t("see-all")}
                 </Button>
               </div>
             </motion.div>

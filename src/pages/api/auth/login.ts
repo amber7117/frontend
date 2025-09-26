@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "lib/dbConnect";
 import Users from "models/Users";
-import jwt from "jsonwebtoken";
+import * as jwt from "jsonwebtoken";
 
 type Data = {
   success?: boolean;
@@ -32,6 +32,14 @@ export default async function handler(
           });
         }
 
+        // Check if NEXTAUTH_SECRET is defined
+        if (!process.env.NEXTAUTH_SECRET) {
+          return res.status(500).json({
+            success: false,
+            message: "Server configuration error: NEXTAUTH_SECRET is not defined",
+          });
+        }
+
         // create a jwt token that is valid for 7 days
         const token = jwt.sign(
           {
@@ -43,7 +51,7 @@ export default async function handler(
             status: user.status,
             phone: user.phone,
           },
-          `absjdkas`,
+          process.env.NEXTAUTH_SECRET,
           {
             expiresIn: "7d",
           }

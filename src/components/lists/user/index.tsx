@@ -54,7 +54,7 @@ export default function UserList({ ...props }) {
         <ListItemIcon className="menu-icon">
           <HomeRoundedIcon />
         </ListItemIcon>
-        {t("header.home")}
+        {t("home")}
       </MenuItem>
       <MenuItem
         onClick={() => {
@@ -65,7 +65,7 @@ export default function UserList({ ...props }) {
         <ListItemIcon className="menu-icon">
           <Person4RoundedIcon />
         </ListItemIcon>
-        {t("header.profile")}
+        {t("profile")}
       </MenuItem>
       <Box px={2} mt={1}>
         <Button
@@ -80,7 +80,7 @@ export default function UserList({ ...props }) {
           startIcon={<LogoutIcon />}
           fullWidth
         >
-          {t("header.logout")}
+          {t("logout")}
         </Button>
       </Box>
     </RootStyled>

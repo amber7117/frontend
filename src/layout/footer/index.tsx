@@ -73,7 +73,7 @@ export default function Footer() {
   const ChangePassWordSchema = Yup.object().shape({
     email: Yup.string()
       .email("Email must be a valid email address")
-      .required(t("footer.email-required")),
+      .required(t("email-required")),
   });
 
   const formik = useFormik({
@@ -108,7 +108,7 @@ export default function Footer() {
           <Grid item lg={3} md={3} sm={6} xs={12}>
             <MainLogo />
             <Typography variant="body2" color="text.primary" mt={1}>
-              {t("footer.address")}
+              {t("address")}
             </Typography>
             <Typography
               href={`mailto:${company.email}`}
@@ -168,13 +168,13 @@ export default function Footer() {
                     color="text.primary"
                     mt={1}
                     mb={1.5}>
-                    {t("footer.newsletter")}
+                    {t("newsletter")}
                   </Typography>
                   <TextField
                     id="newslatter"
                     fullWidth
                     size="small"
-                    placeholder={t("footer.enter-email")}
+                    placeholder={t("enter-email")}
                     variant="outlined"
                     {...getFieldProps("email")}
                     error={Boolean(touched.email && errors.email)}
@@ -208,7 +208,7 @@ export default function Footer() {
               </Form>
             </FormikProvider>
             <Typography variant="subtitle1" color="text.primary" mt={1.5}>
-              {t("footer.follow-us")}
+              {t("follow-us")}
             </Typography>
             <Stack spacing={1} direction="row" className="social-main">
               {social.map((social) => (

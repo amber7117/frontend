@@ -162,7 +162,7 @@ export default function Settings({ ...props }) {
                   justifyContent="space-between"
                   sx={{ py: 1.7, pr: 1, pl: 2.5 }}>
                   <Typography variant="subtitle1">
-                    {t("header.settings")}
+                    {t("settings")}
                   </Typography>
                   <IconButton onClick={() => toggleOpen()}>
                     <CloseRoundedIcon sx={{ fontSize: 20 }} />
@@ -174,27 +174,27 @@ export default function Settings({ ...props }) {
                   <Stack direction="row" className="language-wrapper">
                     <Stack spacing={1.5} sx={{ width: "100%" }}>
                       <Typography variant="subtitle2">
-                        {t("header.language")}
+                        {t("language")}
                       </Typography>
                       <LanguageSelect isDrawer />
                     </Stack>
                     <Stack spacing={1.5} sx={{ width: "100%" }}>
                       <Typography variant="subtitle2">
-                        {t("header.currency")}
+                        {t("currency")}
                       </Typography>
                       <LocaleSelect isDrawer />
                     </Stack>
                   </Stack>
                   <Stack spacing={1.5} className="mode-wrapper">
                     <Typography variant="subtitle2">
-                      {t("header.mode")}
+                      {t("mode")}
                     </Typography>
                     <ThemeModeSetting />
                   </Stack>
 
                   <Stack spacing={1.5}>
                     <Typography variant="subtitle2">
-                      {t("header.color")}
+                      {t("color")}
                     </Typography>
                     <ColorSetting />
                   </Stack>
@@ -214,7 +214,7 @@ export default function Settings({ ...props }) {
                           toggleOpen();
                         }}
                         className="logout-wrapper">
-                        {t("header.logout")}
+                        {t("logout")}
                       </Button>
                     )}
                   </div>

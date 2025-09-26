@@ -429,7 +429,7 @@ export default function ShopProductCard({ ...props }) {
               fullWidth
               disabled={loading || product?.available < 1}
               onClick={() => onAddCart()}>
-              {t("header.add-to-cart")}
+              {t("add-to-cart")}
             </Button>
           )}
         </Stack>
