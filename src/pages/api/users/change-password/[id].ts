@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "lib/dbConnect";
 import Users from "models/Users";
-import authOptions from "../../auth/[...nextauth]";
+import authOptions from "../../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next";
 
 type Data = {

@@ -4,7 +4,7 @@ import Reviews from "models/Reviews";
 import Products from "models/Products";
 import Orders from "models/Orders";
 import Users from "models/Users";
-import authOptions from "../auth/[...nextauth]";
+import authOptions from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next";
 import { isValidToken } from "src/utils/jwt";
 import mongoose from "mongoose";

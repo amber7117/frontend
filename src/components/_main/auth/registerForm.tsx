@@ -84,11 +84,7 @@ export default function RegisterForm() {
     validationSchema: RegisterSchema,
     onSubmit: async (values, { setErrors, setSubmitting }) => {
       setloading(true);
-      const { password, ...others } = values;
-      await mutate({
-        ...others,
-        password: bcrypt.hashSync(password, "$2a$10$CwTycUXWue0Thq9StjUM0u"),
-      });
+      await mutate(values);
     },
   });
 
@@ -96,10 +92,7 @@ export default function RegisterForm() {
     onSuccess: async () => {
       const res = await signIn("credentials", {
         email: values.email,
-        password: bcrypt.hashSync(
-          values.password,
-          "$2a$10$CwTycUXWue0Thq9StjUM0u"
-        ),
+        password: values.password,
         redirect: false,
       });
       setloading(false);

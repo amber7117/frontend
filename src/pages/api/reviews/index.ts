@@ -5,7 +5,7 @@ import Products from "models/Products";
 import Orders from "models/Orders";
 import Users from "models/Users";
 import { getServerSession } from "next-auth";
-import authOptions from "../auth/[...nextauth]";
+import authOptions from "../auth/[...nextauth]/route";
 
 export default async function handler(
   req: NextApiRequest,

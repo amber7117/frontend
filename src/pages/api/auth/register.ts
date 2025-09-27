@@ -3,6 +3,7 @@ import dbConnect from "lib/dbConnect";
 import Users from "models/Users";
 import { generateToken } from "src/utils/jwt-config";
 import axios from "axios";
+import bcrypt from "bcryptjs";
 
 type Data = {
   success?: boolean;
@@ -31,8 +32,12 @@ export default async function handler(
           });
         }
 
+        // Hash the password before saving
+        const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+
         const user = await Users.create({
           ...req.body,
+          password: hashedPassword,
           fullName: req.body.firstName + " " + req.body.lastName,
           status: "not-verified",
           joined: Date.now(),

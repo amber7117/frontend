@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next";
 import dbConnect from "lib/dbConnect";
 import Users from "models/Users";
-import authOptions from "./[...nextauth]";
+import authOptions from "./[...nextauth]/route";
 
 type Data = {
   success?: boolean;

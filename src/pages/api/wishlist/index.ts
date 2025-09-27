@@ -3,7 +3,7 @@ import dbConnect from "lib/dbConnect";
 import Wishlist from "models/Wishlist";
 import Products from "models/Products";
 import Users from "models/Users";
-import authOptions from "../auth/[...nextauth]";
+import authOptions from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next";
 
 export default async function handler(
