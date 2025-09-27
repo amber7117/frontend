@@ -40,7 +40,7 @@ export default function SettingFullscreen() {
         bgcolor: "background.paper",
       }}
     >
-      {fullscreen ? t("exit-fullscreen") : t("fullscreen")}
+      {fullscreen ? t("header.exit-fullscreen") : t("header.fullscreen")}
     </Button>
   );
 }

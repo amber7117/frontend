@@ -45,7 +45,7 @@ export default function CurrenciesList({ ...props }) {
             <ListItemText
               primary={
                 <>
-                  {t(`${item.name}`)}{" "}
+                 {t(`header.${item.name}`)}{" "}
                   <Stack direction="row">
                     <Typography variant="body1" color="text.secondary">
                       {item.prefix} -{" "}

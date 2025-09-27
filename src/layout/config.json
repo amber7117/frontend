@@ -1,46 +1,46 @@
 {
   "menu": [
     {
-      "title": "home",
+      "title": "header.home",
       "path": "/"
     },
     {
-      "title": "categories",
+      "title": "header.categories",
       "path": "/",
       "isDropdown": true
     },
     {
-      "title": "card",
+      "title": "header.card",
       "path": "/products?type=card"
     },
     {
-      "title": "payment",
+      "title": "header.payment",
       "path": "/products?type=payment"
     },
     {
-      "title": "credit",
+      "title": "header.credit",
       "path": "/products?type=credit"
     }
   ],
   "mobile_menu": [
     {
-      "name": "home",
+      "name": "header.home",
       "href": "/"
     },
     {
-      "name": "search",
+      "name": "header.search",
       "href": "/search"
     },
     {
-      "name": "product",
+      "name": "header.product",
       "href": "/products"
     },
     {
-      "name": "checkout",
+      "name": "header.checkout",
       "href": "/checkout"
     },
     {
-      "name": "user",
+      "name": "header.user",
       "isUser": true,
       "href": "/auth/login"
     }
@@ -60,32 +60,32 @@
   },
   "footer_links": [
     {
-      "headline": "product",
+      "headline": "footer.product",
       "children": [
-        { "name": "application", "href": "#" },
-        { "name": "features", "href": "#" },
-        { "name": "requirements", "href": "#" },
-        { "name": "technology", "href": "#" }
+        { "name": "footer.application", "href": "#" },
+        { "name": "footer.features", "href": "#" },
+        { "name": "footer.requirements", "href": "#" },
+        { "name": "footer.technology", "href": "#" }
       ]
     },
     {
-      "headline": "resources",
+      "headline": "footer.resources",
       "children": [
-        { "name": "changelogy", "href": "#" },
-        { "name": "updates", "href": "#" },
-        { "name": "providers", "href": "#" },
-        { "name": "affiliat", "href": "#" },
-        { "name": "roadmap", "href": "#" }
+        { "name": "footer.changelogy", "href": "#" },
+        { "name": "footer.updates", "href": "#" },
+        { "name": "footer.providers", "href": "#" },
+        { "name": "footer.affiliat", "href": "#" },
+        { "name": "footer.roadmap", "href": "#" }
       ]
     },
     {
-      "headline": "company",
+      "headline": "footer.company",
       "children": [
-        { "name": "blog", "href": "#" },
-        { "name": "about-us", "href": "#" },
-        { "name": "contact-us", "href": "#" },
-        { "name": "jobs", "href": "#" },
-        { "name": "team", "href": "#" }
+        { "name": "footer.blog", "href": "#" },
+        { "name": "footer.about-us", "href": "#" },
+        { "name": "footer.contact-us", "href": "#" },
+        { "name": "footer.jobs", "href": "#" },
+        { "name": "footer.team", "href": "#" }
       ]
     }
   ],

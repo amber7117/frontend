@@ -162,9 +162,9 @@ export default function ListItems({ ...props }) {
                     variant="body2"
                     color="text.primary"
                   >
-                    {t("in-stock")}:{" "}
+                    {t("header.in-stock")}:{" "}
                     {item?.variants[item?.selectedVariant || 0]?.available}{" "}
-                    {t("items")}
+                    {t("header.items")}
                   </Typography>
                   <Typography
                     component="span"
@@ -191,7 +191,7 @@ export default function ListItems({ ...props }) {
                       className="list-btn"
                       onClick={onAddToCart}
                     >
-                      {t("add-to-cart")}
+                      {t("header.add-to-cart")}
                     </Button>
                     {deleteLoading ? (
                       <Skeleton

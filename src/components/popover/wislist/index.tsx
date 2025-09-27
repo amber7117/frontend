@@ -114,7 +114,7 @@ export default function NotificationsPopover() {
       >
         <Box sx={{ display: "flex", alignItems: "center", py: 2, px: 2.5 }}>
           <Box sx={{ flexGrow: 1 }}>
-            <Typography variant="subtitle1">{t("wishlist")}</Typography>
+            <Typography variant="subtitle1">{t("header.wishlist")}</Typography>
           </Box>
           {isAuthenticated && (
             <Button
@@ -134,7 +134,7 @@ export default function NotificationsPopover() {
         <Divider />
         {!state.loading && state.wishlist?.length === 0 ? (
           <Typography variant="subtitle1" color="text.secondary" sx={{ p: 3 }}>
-            {t("no-wishlist-found")}
+            {t("header.no-wishlist-found")}
           </Typography>
         ) : (
           <Box sx={{ height: { xs: 340, sm: 400, md: 460 }, overflow: "auto" }}>
