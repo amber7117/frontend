@@ -47,7 +47,7 @@ export default async function handler(
 
         // Create a JWT token that is valid for 30 minutes using centralized configuration
         const token = jwt.sign({
-          _id: _id.toString(),
+          _id: (_id as any).toString(),
           email: userEmail,
           name,
           cover: cover || null,

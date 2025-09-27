@@ -1,9 +1,10 @@
-import NextAuth from "next-auth";
-import CredentialsContainer from "next-auth/providers/credentials";
+import NextAuth, { AuthOptions } from "next-auth";
+// @ts-ignore - NextAuth v4 providers import
+import CredentialsProvider from "next-auth/providers/credentials";
 import Users from "models/Users";
 import bcrypt from "bcryptjs";
 
-export const authOptions: any = {
+export const authOptions: AuthOptions = {
    session: {
      strategy: "jwt",
    },
@@ -20,7 +21,7 @@ export const authOptions: any = {
     },
   },
   providers: [
-    CredentialsContainer({
+    CredentialsProvider({
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },

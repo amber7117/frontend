@@ -45,7 +45,7 @@ export default async function handler(
 
           // Generate JWT token using centralized configuration
           const token = generateToken({
-            _id: client._id.toString(),
+            _id: (client._id as any).toString(),
             email: client.email,
             name: client.name,
             cover: client.cover || null,
@@ -58,7 +58,7 @@ export default async function handler(
             message: "login-success",
             token,
             user: {
-              _id: client._id.toString(),
+              _id: (client._id as any).toString(),
               email: client.email,
               name: client.name,
               cover: client.cover,

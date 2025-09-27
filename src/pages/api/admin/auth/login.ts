@@ -61,7 +61,7 @@ export default async function handler(
         // Create a JWT token that is valid for 7 days
         if (user.status === "active") {
           const token = generateToken({
-            _id: user._id.toString(),
+            _id: (user._id as any).toString(),
             email: user.email,
             name: user.name,
             cover: user.cover || null,
@@ -74,7 +74,7 @@ export default async function handler(
             success: true,
             token,
             user: {
-              _id: user._id.toString(),
+              _id: (user._id as any).toString(),
               email: user.email,
               name: user.name,
               cover: user.cover,

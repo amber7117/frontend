@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getServerSession } from "next-auth/next";
 import dbConnect from "lib/dbConnect";
 import Users from "models/Users";
-import { generateToken } from "src/utils/jwt-config";
-import { jwtAuthMiddleware, AuthenticatedRequest } from "src/middleware/jwt-auth";
+import authOptions from "./[...nextauth]";
 
 type Data = {
   success?: boolean;
@@ -13,26 +13,29 @@ type Data = {
 };
 
 async function userHandler(
-  req: AuthenticatedRequest,
+  req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
   await dbConnect();
   
   const { method } = req;
   
+  // Get session using NextAuth
+  const session: any = await getServerSession(req, res, authOptions);
+  
+  if (!session) {
+    return res.status(401).json({
+      success: false,
+      message: "Authentication required",
+      status: false,
+    });
+  }
+  
   switch (method) {
     case "GET":
       try {
-        if (!req.user) {
-          return res.status(401).json({
-            success: false,
-            message: "Authentication required",
-            status: false,
-          });
-        }
-
         const user = await Users.findOne({
-          email: req.user.email,
+          email: session.user.email,
         });
 
         if (!user) {
@@ -42,20 +45,9 @@ async function userHandler(
           });
         }
 
-        // Generate new token with updated user data
-        const newToken = generateToken({
-          _id: user._id.toString(),
-          email: user.email,
-          name: user.name,
-          cover: user.cover || null,
-          status: user.status,
-          role: user.role,
-        });
-
         res.status(200).json({
           success: true,
           message: "User profile retrieved successfully",
-          token: newToken,
           user: {
             _id: user._id,
             email: user.email,
@@ -81,4 +73,4 @@ async function userHandler(
   }
 }
 
-export default jwtAuthMiddleware(userHandler);
+export default userHandler;
