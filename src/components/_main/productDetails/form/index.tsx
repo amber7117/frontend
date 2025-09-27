@@ -17,7 +17,7 @@ import { LoadingButton } from "@mui/lab";
 // utils
 import { useMutation } from "react-query";
 import * as api from "src/services";
-import axios from "axios";
+import { singleFileUploader, singleFileDelete } from "src/utils/r2-uploader";
 
 import useTranslation from "next-translate/useTranslation";
 import { toast } from "react-hot-toast";
@@ -58,7 +58,7 @@ export default function ProductDetailsReviewForm({ ...props }) {
     initialValues: {
       rating: null,
       review: "",
-      images: [],
+      images: [] as Array<{ url: string; _id: string; blob: string }>,
       blob: [],
     },
     validationSchema: ReviewSchema,
@@ -93,31 +93,29 @@ export default function ProductDetailsReviewForm({ ...props }) {
     onClickCancel();
     resetForm();
   };
-  const handleDrop = (acceptedFiles: any) => {
+  const handleDrop = async (acceptedFiles: any) => {
     setloading(true);
-    const uploaders = acceptedFiles.map((file: any) => {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", "my-uploads");
-      setFieldValue("blob", values.blob.concat(acceptedFiles));
-      // ${process.env.CLOUDINARY_CLOUD_NAME}
-      return axios.post(
-        `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`,
-        formData
-      );
-    });
-    const blobs = acceptedFiles.map((file: any) => {
-      return URL.createObjectURL(file);
-    });
-    axios.all(uploaders).then((data: any) => {
-      const newImages = data.map(({ data }: { data: any }, i: number) => ({
-        url: data.secure_url,
-        _id: data.public_id,
+    setFieldValue("blob", values.blob.concat(acceptedFiles));
+    
+    try {
+      const uploadPromises = acceptedFiles.map((file: any) => singleFileUploader(file));
+      const results = await Promise.all(uploadPromises);
+      
+      const blobs = acceptedFiles.map((file: any) => URL.createObjectURL(file));
+      
+      const newImages = results.map((result: any, i: number) => ({
+        url: result.url,
+        _id: result._id,
         blob: blobs[i],
       }));
+      
       setloading(false);
       setFieldValue("images", values.images.concat(newImages));
-    });
+    } catch (error) {
+      setloading(false);
+      toast.error(t("common:upload-failed"));
+      console.error('Upload error:', error);
+    }
   };
 
   const handleRemoveAll = () => {
@@ -186,7 +184,7 @@ export default function ProductDetailsReviewForm({ ...props }) {
             />
             {touched.images && errors.images && (
               <FormHelperText error sx={{ px: 2 }}>
-                {touched.images && errors.images}
+                {typeof errors.images === 'string' ? errors.images : 'Image upload error'}
               </FormHelperText>
             )}
             <Stack direction="row" justifyContent="flex-end">

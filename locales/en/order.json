@@ -23,5 +23,16 @@
   "address": "Address",
   "status": "Status",
   "cash-on-delivery": "Cash on delivery",
-  "credit-card": "Paid with credit card"
+  "credit-card": "Paid with credit card",
+  "virtual-products": "Virtual Products",
+  "virtual-product-info": "Your virtual products will be available here once the order is processed",
+  "gift-card": "Gift Card",
+  "retrieve-code": "Retrieve Code",
+  "pending-activation": "Pending Activation",
+  "already-used": "Already Used",
+  "expired": "Expired",
+  "your-gift-card-code": "Your Gift Card Code",
+  "code-ready-message": "Your gift card code is ready! Copy it and use it for your purchases.",
+  "copy-code-instruction": "Click the copy button below to copy the code to your clipboard",
+  "copy-code": "Copy Code"
 }

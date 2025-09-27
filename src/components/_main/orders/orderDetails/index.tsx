@@ -15,6 +15,8 @@ import Person2RoundedIcon from "@mui/icons-material/Person2Rounded";
 import LocalShippingRoundedIcon from "@mui/icons-material/LocalShippingRounded";
 import MonetizationOnRoundedIcon from "@mui/icons-material/MonetizationOnRounded";
 import useTranslation from "next-translate/useTranslation";
+// components
+import VirtualProductCard from "../virtualProductCard";
 // styles
 import RootStyled from "./styled";
 
@@ -223,6 +225,13 @@ export default function Details({ ...props }) {
               </Card>
             </Grid>
           </Grid>
+          
+          {/* Virtual Products Section */}
+          {!isLoading && data && (
+            <Grid item xs={12} sx={{ mt: 3 }}>
+              <VirtualProductCard order={data} />
+            </Grid>
+          )}
         </Stack>
       </CardContent>
     </RootStyled>

@@ -41,6 +41,10 @@ interface IProduct extends Document {
   selectedVariant: number;
   variants: IVariant[];
   reviews: mongoose.Types.ObjectId[];
+  isVirtual: boolean;
+  virtualCode?: string;
+  virtualStatus?: 'pending' | 'active' | 'used' | 'expired';
+  virtualExpiryDate?: Date;
 }
 
 // Define the schema for the Variant sub-document
@@ -167,6 +171,21 @@ const ProductSchema: Schema<IProduct> = new mongoose.Schema(
         ref: "Review",
       },
     ],
+    isVirtual: {
+      type: Boolean,
+      default: false,
+    },
+    virtualCode: {
+      type: String,
+    },
+    virtualStatus: {
+      type: String,
+      enum: ['pending', 'active', 'used', 'expired'],
+      default: 'pending',
+    },
+    virtualExpiryDate: {
+      type: Date,
+    },
   },
   {
     timestamps: true,

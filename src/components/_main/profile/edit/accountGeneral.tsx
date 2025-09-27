@@ -18,7 +18,7 @@ import { LoadingButton } from "@mui/lab";
 import UploadAvatar from "src/components/upload/UploadAvatar";
 import * as api from "src/services";
 import { useMutation, useQuery } from "react-query";
-import axios from "axios";
+import { singleFileUploader, singleFileDelete } from "src/utils/r2-uploader";
 import { useDispatch } from "react-redux";
 import { setLogin } from "src/redux/slices/user";
 import { jwtDecode } from "src/utils/jwt";
@@ -131,33 +131,25 @@ export default function AccountGeneral() {
         ...file,
         preview: URL.createObjectURL(file),
       });
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", "my-uploads");
 
-      const config = {
-        onUploadProgress: (progressEvent: any) => {
-          const { loaded, total } = progressEvent;
-          const percentage = Math.floor((loaded * 100) / total);
-          callbackLoading(percentage);
-        },
-      };
-      await axios
-        .post(
-          `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`,
-          formData,
-          config
-        )
-        .then(({ data }) => {
-          setFieldValue("cover", {
-            _id: data.public_id,
-            url: data.secure_url,
-          });
-        })
-        .then(() => {
-          avatarId && avatarMutate({ _id: avatarId });
-          setLoadingUpload(false);
+      try {
+        const result = await singleFileUploader(file);
+        setFieldValue("cover", {
+          _id: result._id,
+          url: result.url,
         });
+        
+        // Delete old avatar if exists
+        if (avatarId) {
+          await singleFileDelete(avatarId);
+        }
+        
+        setLoadingUpload(false);
+      } catch (error) {
+        setLoadingUpload(false);
+        toast.error(t("common:upload-failed"));
+        console.error('Upload error:', error);
+      }
     }
   };
   console.log(values, "value");

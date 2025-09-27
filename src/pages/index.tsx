@@ -116,10 +116,11 @@ export default function Home({
       description="gogogm是备受全球华人信赖的线上游戏点卡，手游和直播充值平台。为全球玩家提供各种最新游戏、手游充值，游戏充值，、直播充值，游戏点卡、游戏激活码、充值卡等。可使用PayPal, 信用卡，网银，各国电子钱包支付。马上到GOGOGM购买吧！"
       canonical=""
     >
-      <HeroCarousel isLoading={!slidesData?.length} data={slidesData} />
-      <Banners data={homeBanners} />
       <CenteredBanner data={homeBanners} />
+         <Banners data={homeBanners} />
       <FeaturedProducts data={featuredProducts} t={t} />
+      <HeroCarousel isLoading={!slidesData?.length} data={slidesData} />
+
       <BrandsMain data={brandData} />
       <Container>
         <CategoriesCmp categories={categories} t={t} />

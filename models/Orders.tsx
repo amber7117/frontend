@@ -18,6 +18,12 @@ interface IOrder extends Document {
   orderNo?: string;
   items?: any[];
   user: object;
+  virtualCodes?: {
+    productId: string;
+    code: string;
+    status: 'pending' | 'active' | 'used' | 'expired';
+    activatedAt?: Date;
+  }[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -64,6 +70,24 @@ const OrderSchema: Schema<IOrder> = new mongoose.Schema(
       type: Object,
       required: [true, "User is required."],
     },
+    virtualCodes: [{
+      productId: {
+        type: String,
+        required: true,
+      },
+      code: {
+        type: String,
+        required: true,
+      },
+      status: {
+        type: String,
+        enum: ['pending', 'active', 'used', 'expired'],
+        default: 'pending',
+      },
+      activatedAt: {
+        type: Date,
+      },
+    }],
   },
   {
     timestamps: true, // Adds createdAt and updatedAt fields automatically
