@@ -1,61 +1,35 @@
-import cloudinary from "src/utils/cloudinary";
-
-const uploadOnCloudinary = (file) => {
-  return cloudinary.uploader.unsigned_upload(file);
-};
-const deleteFromCloudinary = (file) => {
-  return cloudinary.uploader.destroy(file);
-};
+import { uploadToR2, deleteFromR2 } from "./r2-uploader.js";
 
 export const multiFileUploader = async (images) => {
-  const cloudinaryImageUploadMethod = async (file) => {
-    const image = await uploadOnCloudinary(file);
-    return image;
-  };
-
-  var imageUrlList = [];
-
-  for (var i = 0; i < images.length; i++) {
-    var localFilePath = images[i];
-
-    // Upload the local image to Cloudinary
-    // and get image url as response
-    var result = await cloudinaryImageUploadMethod(localFilePath);
-    imageUrlList.push(result);
-  }
-  const uploaded = imageUrlList.map((v) => {
+  const uploadPromises = images.map(async (file) => {
+    const result = await uploadToR2(file);
     return {
-      _id: v.public_id,
-      url: v.secure_url,
+      _id: result.key,
+      url: result.url,
     };
   });
-  return uploaded;
+
+  return Promise.all(uploadPromises);
 };
 
-export const singleFileUploader = async (image) => {
-  const result = await uploadOnCloudinary(image);
-  const uploaded = {
-    _id: result.public_id,
-    url: result.secure_url,
+export const singleFileUploader = async (file) => {
+  const result = await uploadToR2(file);
+  return {
+    _id: result.key,
+    url: result.url,
   };
-  return uploaded;
 };
 
-export const singleFileDelete = async (id) => {
-  const result = await deleteFromCloudinary(id);
+export const singleFileDelete = async (fileKey) => {
+  const result = await deleteFromR2(fileKey);
   return result;
 };
 
-export const multiFilesDelete = async (images) => {
-  
-  var imageUrlList = [];
-  for (var i = 0; i < images.length; i++) {
-    var localFilePath = images[i];
+export const multiFilesDelete = async (files) => {
+  const deletePromises = files.map(async (file) => {
+    const key = typeof file === 'string' ? file : file._id;
+    return await deleteFromR2(key);
+  });
 
-    // Upload the local image to Cloudinary
-    // and get image url as response
-    var result = await deleteFromCloudinary(localFilePath._id);
-    imageUrlList.push(result);
-  }
-  return result;
+  return Promise.all(deletePromises);
 };
