@@ -1,89 +1,114 @@
-import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import r2Client from "./r2.js";
 import { v4 as uuidv4 } from "uuid";
 
-// Initialize S3 client for Cloudflare R2
-const s3Client = new S3Client({
-  region: "auto",
-  endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-  credentials: {
-    accessKeyId: process.env.R2_ACCESS_KEY_ID,
-    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
-  },
-});
+/**
+ * @typedef {Object} UploadResult
+ * @property {string} _id - File key (for compatibility)
+ * @property {string} key - File key
+ * @property {string} url - Public URL of the uploaded file
+ */
 
-// Upload file to R2
-export const uploadToR2 = async (file) => {
+/**
+ * Upload a file to Cloudflare R2
+ * @param {File|Buffer} file - The file to upload
+ * @param {string} fileName - Optional custom file name
+ * @returns {Promise<UploadResult>} Upload result with URL and key
+ */
+export const uploadToR2 = async (file, fileName = null) => {
   try {
-    const fileExtension = file.name.split('.').pop();
-    const fileName = `${uuidv4()}.${fileExtension}`;
+    const fileKey = fileName || `${uuidv4()}-${file.name || "file"}`;
     
     const command = new PutObjectCommand({
       Bucket: process.env.R2_BUCKET_NAME,
-      Key: fileName,
+      Key: fileKey,
       Body: file,
-      ContentType: file.type,
-      ACL: 'public-read',
+      ContentType: file.type || "application/octet-stream",
     });
 
-    await s3Client.send(command);
+    await r2Client.send(command);
     
-    // Return the public URL
     return {
-      _id: fileName,
-      url: `${process.env.R2_PUBLIC_URL}/${fileName}`,
-      public_id: fileName,
-      secure_url: `${process.env.R2_PUBLIC_URL}/${fileName}`,
+      _id: fileKey, // Add _id for compatibility
+      key: fileKey,
+      url: `${process.env.R2_PUBLIC_URL}/${fileKey}`,
     };
   } catch (error) {
-    console.error('Error uploading to R2:', error);
+    console.error("Error uploading to R2:", error);
     throw error;
   }
 };
 
-// Delete file from R2
-export const deleteFromR2 = async (fileId) => {
+/**
+ * Delete a file from Cloudflare R2
+ * @param {string} fileKey - The file key to delete
+ * @returns {Promise<Object>} Delete result
+ */
+export const deleteFromR2 = async (fileKey) => {
   try {
     const command = new DeleteObjectCommand({
       Bucket: process.env.R2_BUCKET_NAME,
-      Key: fileId,
+      Key: fileKey,
     });
 
-    await s3Client.send(command);
-    return { result: 'ok' };
+    const result = await r2Client.send(command);
+    return result;
   } catch (error) {
-    console.error('Error deleting from R2:', error);
+    console.error("Error deleting from R2:", error);
     throw error;
   }
 };
 
-// Multiple file upload
+/**
+ * Upload multiple files to R2
+ * @param {Array} files - Array of files to upload
+ * @returns {Promise<Array>} Array of upload results
+ */
 export const multiFileUploader = async (files) => {
-  const uploadPromises = files.map(file => uploadToR2(file));
-  const results = await Promise.all(uploadPromises);
-  
-  return results.map(result => ({
-    _id: result.public_id,
-    url: result.secure_url,
-  }));
+  const uploadPromises = files.map(async (file) => {
+    const result = await uploadToR2(file);
+    return {
+      _id: result.key, // Maintain compatibility with existing code
+      key: result.key, // New property for clarity
+      url: result.url,
+    };
+  });
+
+  return Promise.all(uploadPromises);
 };
 
-// Single file upload
+/**
+ * Upload a single file to R2
+ * @param {File|Buffer} file - The file to upload
+ * @returns {Promise<Object>} Upload result
+ */
 export const singleFileUploader = async (file) => {
   const result = await uploadToR2(file);
   return {
-    _id: result.public_id,
-    url: result.secure_url,
+    _id: result.key, // Maintain compatibility with existing code
+    key: result.key, // New property for clarity
+    url: result.url,
   };
 };
 
-// Single file delete
-export const singleFileDelete = async (fileId) => {
-  return await deleteFromR2(fileId);
+/**
+ * Delete a single file from R2
+ * @param {string} fileKey - The file key to delete
+ * @returns {Promise<Object>} Delete result
+ */
+export const singleFileDelete = async (fileKey) => {
+  return await deleteFromR2(fileKey);
 };
 
-// Multiple files delete
-export const multiFilesDelete = async (files) => {
-  const deletePromises = files.map(file => deleteFromR2(file._id));
-  await Promise.all(deletePromises);
-  return { result: 'ok' };
+/**
+ * Delete multiple files from R2
+ * @param {Array} fileKeys - Array of file keys to delete
+ * @returns {Promise<Array>} Array of delete results
+ */
+export const multiFilesDelete = async (fileKeys) => {
+  const deletePromises = fileKeys.map(async (fileKey) => {
+    return await deleteFromR2(fileKey._id || fileKey);
+  });
+
+  return Promise.all(deletePromises);
 };

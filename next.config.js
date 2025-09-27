@@ -40,6 +40,10 @@ const nextConfig = withPWA(
           protocol: 'https',
           hostname: 'seagm-media.seagmcdn.com',
         },
+        {
+          protocol: 'https',
+          hostname: 'pub-*.r2.dev',
+        },
       ],
     },
     webpack: (config) => {
