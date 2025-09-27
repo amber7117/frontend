@@ -183,9 +183,6 @@ export default async function handler(
               message: error,
             });
           });
-        res.status(200).json({
-          success: true,
-        });
       } catch (error) {
         res.status(400).json({ success: false, message: error.message });
       }
