@@ -17,23 +17,6 @@ import Box from "@mui/material/Box";
 import '../components/styled.css';
 
 function AppContent({ Component, pageProps }: { Component: any; pageProps: any }) {
-  const [isDemo, setIsDemo] = React.useState(false);
-  
-  React.useEffect(() => {
-    // This runs only on the client side
-    setIsDemo(window.location.pathname === "/demo");
-  }, []);
-
-  if (isDemo) {
-    return (
-      <Box>
-        <GlobalStyles />
-        <ProgressBar />
-        <Component {...pageProps} />
-      </Box>
-    );
-  }
-
   return (
     <Layout>
       <GlobalStyles />
