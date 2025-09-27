@@ -34,7 +34,7 @@ const nextConfig = withPWA(
       remotePatterns: [
         {
           protocol: 'https',
-          hostname: 'res.cloudinary.com',
+          hostname: 'cloudflare.com',
         },
         {
           protocol: 'https',

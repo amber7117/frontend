@@ -1,14 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "lib/dbConnect";
 import Users from "models/Users";
-import * as jwt from "jsonwebtoken";
+import { generateToken } from "src/utils/jwt-config";
 
 type Data = {
   success?: boolean;
   message?: string;
   status?: boolean;
   token?: string;
+  user?: any;
 };
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
@@ -32,41 +34,42 @@ export default async function handler(
           });
         }
 
-        // Check if NEXTAUTH_SECRET is defined
-        if (!process.env.NEXTAUTH_SECRET) {
-          return res.status(500).json({
-            success: false,
-            message: "Server configuration error: NEXTAUTH_SECRET is not defined",
-          });
-        }
+        // Generate JWT token using centralized configuration
+        const token = generateToken({
+          _id: user._id.toString(),
+          email: user.email,
+          name: user.name || user.fullName || user.firstName,
+          cover: user.cover || null,
+          status: user.status,
+          role: user.role,
+        });
 
-        // create a jwt token that is valid for 7 days
-        const token = jwt.sign(
-          {
-            _id: user._id,
-            email: user.email,
-            fullName: user.fullName,
-            firstName: user.firstName,
-            avatar: user.cover ? user.cover : null,
-            status: user.status,
-            phone: user.phone,
-          },
-          process.env.NEXTAUTH_SECRET,
-          {
-            expiresIn: "7d",
-          }
-        );
         res.status(200).json({
           success: true,
           message: "login-success",
           token,
+          user: {
+            _id: user._id,
+            email: user.email,
+            name: user.name || user.fullName || user.firstName,
+            cover: user.cover,
+            status: user.status,
+            role: user.role,
+            phone: user.phone,
+          },
         });
-      } catch (error) {
-        res.status(400).json({ success: false, message: error.message });
+      } catch (error: any) {
+        res.status(400).json({ 
+          success: false, 
+          message: error.message || "An error occurred" 
+        });
       }
       break;
     default:
-      res.status(400).json({ success: false });
+      res.status(405).json({ 
+        success: false, 
+        message: "Method not allowed" 
+      });
       break;
   }
 }

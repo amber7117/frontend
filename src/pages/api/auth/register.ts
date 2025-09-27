@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "lib/dbConnect";
 import Users from "models/Users";
-import jwt from "jsonwebtoken";
+import { generateToken } from "src/utils/jwt-config";
 import axios from "axios";
 
 type Data = {
@@ -37,15 +37,12 @@ export default async function handler(
           status: "not-verified",
           joined: Date.now(),
         }); /* create a new model in the database */
-        const token = jwt.sign(
-          {
-            email: user.email,
-          },
-          `security`,
-          {
-            expiresIn: 60 * 60,
-          }
-        );
+        
+        // Generate JWT token using centralized configuration
+        const token = generateToken({
+          _id: user._id.toString(),
+          email: user.email,
+        });
         var data = JSON.stringify({
           service_id: "default_service",
           template_id: "template_d6xktym",

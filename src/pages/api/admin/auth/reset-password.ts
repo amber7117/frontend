@@ -3,7 +3,7 @@ import runMiddleware from "lib/cors";
 import dbConnect from "lib/dbConnect";
 import AdminsModel from "models/Admins";
 import Cors from "cors";
-import { jwtDecode, isValidToken } from "src/utils/jwt";
+import { verifyToken, isTokenExpired } from "src/utils/jwt-config";
 import bcrypt from "bcrypt";
 
 // Initializing the cors middleware
@@ -30,25 +30,26 @@ export default async function handler(
       try {
         const { newPassword, token } = req.body;
 
-        // Check if the token is valid
-        const isValid = isValidToken(token);
-        if (!isValid) {
+        // Check if the token is valid and not expired
+        const decoded = verifyToken(token);
+        if (!decoded || isTokenExpired(token)) {
           return res.status(400).json({
             success: false,
             message: "expired-token-error",
           });
         }
 
-        const { email } = jwtDecode<any>(token);
+        const { email } = decoded;
+
+        // Hash the new password
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
 
         // Update the admin's password
         await AdminsModel.findOneAndUpdate(
           { email },
           {
-            password: bcrypt.hashSync(
-              newPassword,
-              "$2a$10$CwTycUXWue0Thq9StjUM0u"
-            ),
+            password: hashedPassword,
           },
           {
             new: true,

@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import runMiddleware from "lib/cors";
 import dbConnect from "lib/dbConnect";
 import Users from "models/Users";
-import { jwtDecode, isValidToken } from "src/utils/jwt";
+import { verifyToken, decodeToken, isTokenExpired } from "src/utils/jwt-config";
 
 // Initializing the cors middleware
 const cors = Cors({
@@ -29,19 +29,26 @@ export default async function handler(
     case "POST":
       try {
         const { newPassword, token } = req.body;
-        const isValidtoken = isValidToken(token);
-
-        if (!isValidtoken) {
+        
+        // Check if token is expired using centralized configuration
+        if (isTokenExpired(token)) {
           return res.status(400).json({
             success: false,
             message: "token-expired",
           });
         }
 
-        const { _id } = jwtDecode<any>(token);
+        // Verify the token
+        const decoded = verifyToken(token);
+        if (!decoded) {
+          return res.status(400).json({
+            success: false,
+            message: "invalid-token",
+          });
+        }
 
         await Users.findByIdAndUpdate(
-          _id,
+          decoded._id,
           {
             password: newPassword,
           },
@@ -55,13 +62,19 @@ export default async function handler(
           success: true,
           message: "password-updated",
         });
-      } catch (error) {
-        res.status(400).json({ success: false, message: error.message });
+      } catch (error: any) {
+        res.status(400).json({ 
+          success: false, 
+          message: error.message || "An error occurred" 
+        });
       }
       break;
 
     default:
-      res.status(400).json({ success: false });
+      res.status(405).json({ 
+        success: false, 
+        message: "Method not allowed" 
+      });
       break;
   }
 }

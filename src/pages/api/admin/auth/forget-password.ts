@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import runMiddleware from "lib/cors";
 import dbConnect from "lib/dbConnect";
-import AdminsModel from "models/Admins";
-import jwt from "jsonwebtoken";
+import AdminsModel, { IAdmin } from "models/Admins";
+import { generateToken } from "src/utils/jwt-config";
 import Cors from "cors";
 import axios from "axios";
+import jwt from "jsonwebtoken";
 
 // Initializing the cors middleware
 const cors = Cors({
@@ -41,22 +42,20 @@ export default async function handler(
           });
         }
 
-        const { _id, email: userEmail, name, cover, status } = admin;
+        const adminData = admin as IAdmin;
+        const { _id, email: userEmail, name, cover, status, role } = adminData;
 
-        // Create a JWT token that is valid for 10 minutes
-        const token = jwt.sign(
-          {
-            _id,
-            email: userEmail,
-            name,
-            cover: cover || null,
-            status,
-          },
-          "secret key",
-          {
-            expiresIn: "30m",
-          }
-        );
+        // Create a JWT token that is valid for 30 minutes using centralized configuration
+        const token = jwt.sign({
+          _id: _id.toString(),
+          email: userEmail,
+          name,
+          cover: cover || null,
+          status,
+          role: role || "admin",
+        }, process.env.JWT_SECRET || '42d3ca17c06a2ff1b436ab3d931be4c9', {
+          expiresIn: "30m",
+        });
 
         var data = JSON.stringify({
           service_id: "service_kcodhc8",

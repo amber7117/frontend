@@ -1,65 +1,84 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "lib/dbConnect";
 import Users from "models/Users";
-import jwt from "jsonwebtoken";
-import jwtDecode from "jwt-decode";
+import { generateToken } from "src/utils/jwt-config";
+import { jwtAuthMiddleware, AuthenticatedRequest } from "src/middleware/jwt-auth";
 
 type Data = {
   success?: boolean;
   message?: string;
   status?: boolean;
   token?: string;
+  user?: any;
 };
 
-export default async function handler(
-  req: NextApiRequest,
+async function userHandler(
+  req: AuthenticatedRequest,
   res: NextApiResponse<Data>
 ) {
-  const {
-    headers: { authorization },
-    method,
-  } = req.body;
   await dbConnect();
-  const { email } = jwtDecode<any>(authorization);
+  
+  const { method } = req;
+  
   switch (method) {
     case "GET":
       try {
+        if (!req.user) {
+          return res.status(401).json({
+            success: false,
+            message: "Authentication required",
+            status: false,
+          });
+        }
+
         const user = await Users.findOne({
-          email: email,
+          email: req.user.email,
         });
 
         if (!user) {
-          res.status(404).json({
-            message: "incorrect-email-password",
+          return res.status(404).json({
+            message: "User not found",
             status: false,
           });
-        } else {
-          // create a jwt token that is valid for 7 days
-          const token = jwt.sign(
-            {
-              _id: user._id,
-              email: user.email,
-              name: user.name,
-              cover: user.cover ? user.cover : null,
-              status: user.status,
-            },
-            `absjdkas`,
-            {
-              expiresIn: "7d",
-            }
-          );
-          res.status(200).json({
-            success: true,
-            message: "updated-profile",
-            token,
-          });
         }
-      } catch (error) {
-        res.status(400).json({ success: false, message: error.message });
+
+        // Generate new token with updated user data
+        const newToken = generateToken({
+          _id: user._id.toString(),
+          email: user.email,
+          name: user.name,
+          cover: user.cover || null,
+          status: user.status,
+          role: user.role,
+        });
+
+        res.status(200).json({
+          success: true,
+          message: "User profile retrieved successfully",
+          token: newToken,
+          user: {
+            _id: user._id,
+            email: user.email,
+            name: user.name,
+            cover: user.cover,
+            status: user.status,
+            role: user.role,
+          },
+        });
+      } catch (error: any) {
+        res.status(400).json({ 
+          success: false, 
+          message: error.message || "An error occurred" 
+        });
       }
       break;
     default:
-      res.status(400).json({ success: false });
+      res.status(405).json({ 
+        success: false, 
+        message: "Method not allowed" 
+      });
       break;
   }
 }
+
+export default jwtAuthMiddleware(userHandler);
